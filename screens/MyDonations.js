@@ -53,31 +53,6 @@ export default class MyDonationScreen extends Component {
     donationRef.update({
       request_status: requestStatus
     });
-    this.sendNotification(bookDetails, requestStatus);
-  };
-
-  sendNotification = (bookDetails, requestStatus) => {
-    const { request_id, donor_id } = bookDetails;
-    db.collection("all_notifications")
-      .where("request_id", "==", request_id)
-      .where("donor_id", "==", donor_id)
-      .get()
-      .then(snapshot => {
-        snapshot.docs.map(doc => {
-          const message =
-            requestStatus === "Book Sent"
-              ? `${this.state.donorName} sent you book`
-              : `${this.state.donorName} has shown interest in donating the book`;
-
-          db.collection("all_notifications")
-            .doc(doc.id)
-            .update({
-              message: message,
-              notification_status: "unread",
-              date: firebase.firestore.FieldValue.serverTimestamp()
-            });
-        });
-      });
   };
 
   componentWillUnmount() {
