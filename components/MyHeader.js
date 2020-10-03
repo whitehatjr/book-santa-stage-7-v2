@@ -1,22 +1,6 @@
 import React from "react";
-import { View } from "react-native";
-import { Header, Icon, Badge } from "react-native-elements";
+import { Header, Icon } from "react-native-elements";
 import { StyleSheet } from "react-native";
-
-const BellIconWithBadge = props => {
-  return (
-    <View>
-      <Icon
-        name={"bell"}
-        type={"font-awesome"}
-        color={"#696969"}
-        size={25}
-        onPress={() => props.navigation.navigate("Notifications")}
-      />
-      <Badge value={"1"} containerStyle={styles.badgeContainer} />
-    </View>
-  );
-};
 
 const MyHeader = props => {
   return (
@@ -33,7 +17,6 @@ const MyHeader = props => {
         text: props.title,
         style: styles.title
       }}
-      rightComponent={<BellIconWithBadge {...props} />}
       backgroundColor={"#6fc0b8"}
     />
   );
@@ -46,10 +29,5 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 25,
     fontWeight: "bold"
-  },
-  badgeContainer: {
-    position: "absolute",
-    top: -4,
-    right: -4
   }
 });
